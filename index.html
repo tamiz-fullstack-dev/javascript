@@ -94,32 +94,6 @@
     table_row.appendChild(table_head);
 
 
-    var table_row_2 = document.createElement("tr");    
-    var table_foot = document.createElement("th");
-    table_foot.textContent = "Total Amount : "
-    table_foot.colSpan="4";
-    table_row_2.appendChild(table_foot);
-    var table_foot = document.createElement("th");    
-    table_row_2.appendChild(table_foot);
-
-
-    var table_row_3 = document.createElement("tr");    
-    var table_foot = document.createElement("th");
-    table_foot.textContent = "Tax : "
-    table_foot.colSpan="4";
-    table_row_3.appendChild(table_foot);
-    var table_foot = document.createElement("th");    
-    table_row_3.appendChild(table_foot);
-
-
-    var table_row_4 = document.createElement("tr");    
-    var table_foot = document.createElement("th");
-    table_foot.textContent = "Payble amount : "
-    table_foot.colSpan="4";
-    table_row_4.appendChild(table_foot);
-    var table_foot = document.createElement("th");    
-    table_row_4.appendChild(table_foot);
-
 
 
     table.appendChild(table_row);
@@ -172,8 +146,7 @@
         var table_data = document.createElement("td");
         var input_quantity = document.createElement("input");
         input_quantity.type = "number";
-        input_quantity.id = "quantity"+counter;
-        input_quantity.placeholder = "Enter quantity";
+        input_quantity.id = "quantity"+counter;        
         input_quantity.style.width = "100%";
         input_quantity.addEventListener('change', minorCalculation, false);
         input_quantity.myParam = counter;
@@ -184,8 +157,7 @@
         var table_data = document.createElement("td");
         var input_rate = document.createElement("input");
         input_rate.type = "number";
-        input_rate.id = "rate"+counter;
-        input_rate.placeholder = "Enter rate";
+        input_rate.id = "rate"+counter;        
         input_rate.style.width = "100%";
         input_rate.addEventListener('change', minorCalculation, false);
         input_rate.myParam = counter;
@@ -197,8 +169,7 @@
         var table_data = document.createElement("td");
         var input_tax = document.createElement("input");
         input_tax.type = "number";
-        input_tax.id = "tax"+counter;
-        input_tax.placeholder = "Enter tax";
+        input_tax.id = "tax"+counter;        
         input_tax.style.width = "100%";
         input_tax.addEventListener('change', minorCalculation, false);
         input_tax.myParam = counter;
@@ -210,8 +181,7 @@
         var table_data = document.createElement("td");
         var input_amount = document.createElement("input");
         input_amount.type = "number";
-        input_amount.id = "amount"+counter;
-        input_amount.placeholder = "Amount";
+        input_amount.id = "amount"+counter;        
         input_amount.style.width = "100%";
         input_amount.setAttribute("readonly",true);
         input_amount.className = "cl_amount";
