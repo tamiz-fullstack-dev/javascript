@@ -1,0 +1,506 @@
+<head>
+    <style>
+        td, th {
+            border: 1px solid;            
+        }
+
+        .table{
+            width: 75%;
+            border-collapse: collapse;
+            border: 1px solid red;
+            margin-top: 25px;
+            margin-left: auto;
+            margin-right: auto;
+            
+        }
+
+        input {
+            background-color: transparent;
+            border: 0px solid;
+            height: 20px;
+            width: 160px;
+            color: rgb(208, 35, 35);
+        }
+
+        input:focus{
+            outline: none;
+        }
+
+        .center {
+            margin-top: 25px;
+            text-align: center;
+        }
+        .button{
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+
+
+
+<script>    
+    var div_container = document.createElement("div");
+    div_container.id="div_container";
+    document.body.appendChild(div_container);
+
+    var div_form = document.createElement("div");
+
+    div_container.appendChild(div_form);
+
+
+    var noOfrow = document.createElement("input");
+    noOfrow.type="hidden";
+    noOfrow.value="0";
+    noOfrow.id = "noOfrow";
+    div_container.appendChild(noOfrow);
+
+    var table = document.createElement("table");
+    table.setAttribute("class", "table");
+    
+
+    var table_row = document.createElement("tr");
+    
+
+    var table_head = document.createElement("th");
+    table_head.textContent = "SL";
+    table_row.appendChild(table_head);
+
+    var table_head = document.createElement("th");
+    table_head.textContent = "Item";
+    table_row.appendChild(table_head);
+
+    var table_head = document.createElement("th");
+    table_head.textContent = "Quantity";
+    table_row.appendChild(table_head);
+
+    var table_head = document.createElement("th");
+    table_head.textContent = "Rate";
+    table_row.appendChild(table_head);
+
+    var table_head = document.createElement("th");
+    table_head.textContent = "Tax(%)";
+    table_row.appendChild(table_head);
+
+    var table_head = document.createElement("th");
+    table_head.textContent = "Amount";
+    table_row.appendChild(table_head);
+
+
+    var table_row_2 = document.createElement("tr");    
+    var table_foot = document.createElement("th");
+    table_foot.textContent = "Total Amount : "
+    table_foot.colSpan="4";
+    table_row_2.appendChild(table_foot);
+    var table_foot = document.createElement("th");    
+    table_row_2.appendChild(table_foot);
+
+
+    var table_row_3 = document.createElement("tr");    
+    var table_foot = document.createElement("th");
+    table_foot.textContent = "Tax : "
+    table_foot.colSpan="4";
+    table_row_3.appendChild(table_foot);
+    var table_foot = document.createElement("th");    
+    table_row_3.appendChild(table_foot);
+
+
+    var table_row_4 = document.createElement("tr");    
+    var table_foot = document.createElement("th");
+    table_foot.textContent = "Payble amount : "
+    table_foot.colSpan="4";
+    table_row_4.appendChild(table_foot);
+    var table_foot = document.createElement("th");    
+    table_row_4.appendChild(table_foot);
+
+
+
+    table.appendChild(table_row);
+    div_form.appendChild(table);
+
+
+    var div_button = document.createElement("div");
+    div_button.setAttribute("class","center");
+    div_container.appendChild(div_button);
+
+
+    var addmore = document.createElement("button");
+    addmore.value="Add More";
+    addmore.textContent = "Add More";
+    addmore.setAttribute("class","button");
+    div_button.appendChild(addmore);
+
+
+  //  table_data.setAttribute("class")
+
+
+
+
+    addmore.addEventListener("click",addMorefield);
+
+    function addMorefield(){
+        var counter = noOfrow.value;
+        
+        counter++;
+        var table_row_1 = document.createElement("tr");
+        table_row_1.id = counter;
+        noOfrow.value = counter;
+
+        var table_data = document.createElement("td");
+        var sl = document.createElement("span");
+        sl.textContent = counter;              
+        table_data.appendChild(sl);
+        table_row_1.appendChild(table_data);
+
+        var table_data = document.createElement("td");
+        var input_item = document.createElement("input");
+        input_item.type = "text";
+        input_item.id = "item"+counter;
+        input_item.placeholder = "Enter item";
+        input_item.style.width = "100%";
+        input_item.className = "cl_name";        
+        table_data.appendChild(input_item);
+        table_row_1.appendChild(table_data);
+
+        var table_data = document.createElement("td");
+        var input_quantity = document.createElement("input");
+        input_quantity.type = "number";
+        input_quantity.id = "quantity"+counter;
+        input_quantity.placeholder = "Enter quantity";
+        input_quantity.style.width = "100%";
+        input_quantity.addEventListener('change', minorCalculation, false);
+        input_quantity.myParam = counter;
+        input_quantity.className = "cl_quantity";
+        table_data.appendChild(input_quantity);
+        table_row_1.appendChild(table_data);
+
+        var table_data = document.createElement("td");
+        var input_rate = document.createElement("input");
+        input_rate.type = "number";
+        input_rate.id = "rate"+counter;
+        input_rate.placeholder = "Enter rate";
+        input_rate.style.width = "100%";
+        input_rate.addEventListener('change', minorCalculation, false);
+        input_rate.myParam = counter;
+        input_rate.className = "cl_rate";
+        table_data.appendChild(input_rate);
+        table_row_1.appendChild(table_data);
+
+
+        var table_data = document.createElement("td");
+        var input_tax = document.createElement("input");
+        input_tax.type = "number";
+        input_tax.id = "tax"+counter;
+        input_tax.placeholder = "Enter tax";
+        input_tax.style.width = "100%";
+        input_tax.addEventListener('change', minorCalculation, false);
+        input_tax.myParam = counter;
+        input_tax.className = "cl_tax";
+        table_data.appendChild(input_tax);
+        table_row_1.appendChild(table_data);
+
+
+        var table_data = document.createElement("td");
+        var input_amount = document.createElement("input");
+        input_amount.type = "number";
+        input_amount.id = "amount"+counter;
+        input_amount.placeholder = "Amount";
+        input_amount.style.width = "100%";
+        input_amount.setAttribute("readonly",true);
+        input_amount.className = "cl_amount";
+        table_data.appendChild(input_amount);
+        table_row_1.appendChild(table_data);
+
+
+        
+        var tax_amount = document.createElement("input");
+        tax_amount.type = "hidden";
+        tax_amount.id = "taxamount"+counter;       
+        table_row_1.appendChild(tax_amount);
+
+        
+
+        table.appendChild(table_row_1);
+    }
+
+    function minorCalculation(evt)
+    {
+        
+        var quantity_value = document.querySelector('#quantity'+evt.currentTarget.myParam).value;
+        var rate_value = document.querySelector('#rate'+evt.currentTarget.myParam).value;
+        var tax_value = document.querySelector('#tax'+evt.currentTarget.myParam).value;   
+        
+        quantity_value = Number(quantity_value);
+        var amount_value = quantity_value * rate_value;        
+        document.querySelector('#amount'+evt.currentTarget.myParam).value = amount_value;
+        
+        var tax_amount = amount_value * tax_value/100;        
+        document.querySelector('#taxamount'+evt.currentTarget.myParam).value = tax_amount;
+
+    }
+    
+
+    var remove = document.createElement("button");
+    remove.value="Remove";
+    remove.textContent = "Remove";
+    remove.setAttribute("class","button");
+    div_button.appendChild(remove);
+
+    remove.addEventListener("click",removeField);
+
+    function removeField(){
+        var counter = noOfrow.value;
+        
+        var elem = document.getElementById(counter);
+
+        noOfrow.value = counter -1;
+        return elem.parentNode.removeChild(elem);
+        
+        
+
+    }
+
+    var calculate = document.createElement("button");
+    calculate.value="Calculate";
+    calculate.textContent = "Calculate";
+    calculate.addEventListener("click",majorCalculation);
+    calculate.setAttribute("class","button");
+    div_button.appendChild(calculate);
+
+    function majorCalculation(){
+        var lineOfData = document.querySelector('#noOfrow').value;
+        if(lineOfData==0){
+            alert("Please enter record");
+        }else{
+            var am=0; 
+            var tx = 0;
+            var filedcheck;
+            for(var i=1; i<=lineOfData; i++){
+                t_item = document.querySelector('#item'+i).value;
+                t_quantity = document.querySelector('#quantity'+i).value;
+                t_rate = document.querySelector('#rate'+i).value;
+                t_tax = document.querySelector('#tax'+i).value;                
+                t_am = document.querySelector('#amount'+i).value;
+                t_taxamount = document.querySelector('#taxamount'+i).value;
+
+                if(t_item == "" || t_item =="undefined" || t_quantity == "" || t_quantity =="undefined" || t_rate == "" || t_rate =="undefined" || t_tax == "" || t_tax =="undefined" || t_am == "" || t_am =="undefined" || t_taxamount == "" || t_taxamount =="undefined"){
+                    filedcheck = "not_filled";
+                }
+                else{          
+                    am = Number(am) + Number(t_am);
+                    tx = Number(tx) + Number(t_taxamount);
+                }                
+            }
+
+            if(filedcheck!="not_filled"){ 
+
+                var table_row_3 = document.createElement("tr");
+                var table_data = document.createElement("td");                    
+                table_data.colSpan = "5";
+                var span = document.createElement("span");
+                span.textContent = "Total Amount";
+                table_data.appendChild(span);
+                table_row_3.appendChild(table_data);
+                var table_data = document.createElement("td");       
+                var span = document.createElement("span");
+                span.textContent = am;
+                span.id="am";
+                table_data.appendChild(span);
+                table_row_3.appendChild(table_data);
+
+
+
+                var table_row_4 = document.createElement("tr");
+                var table_data = document.createElement("td");                    
+                table_data.colSpan = "5";
+                var span = document.createElement("span");
+                span.textContent = "Total Tax";
+                table_data.appendChild(span);
+                table_row_4.appendChild(table_data);
+                var table_data = document.createElement("td");       
+                var span = document.createElement("span");
+                span.textContent = tx;
+                span.id = "tx";
+                table_data.appendChild(span);
+                table_row_4.appendChild(table_data);
+
+
+                var table_row_5 = document.createElement("tr");
+                var table_data = document.createElement("td");                    
+                table_data.colSpan = "5";
+                var span = document.createElement("span");
+                span.textContent = "Payble";
+                table_data.appendChild(span);
+                table_row_5.appendChild(table_data);
+                var table_data = document.createElement("td");       
+                var span = document.createElement("span");
+                span.textContent = am-tx;
+                span.id = "pybl";
+                table_data.appendChild(span);
+                table_row_5.appendChild(table_data);
+
+
+                
+                table.appendChild(table_row_3);
+                table.appendChild(table_row_4);
+                table.appendChild(table_row_5);
+
+                print.style.display = "block";
+
+            }else{
+                alert("Please Enter filled properly");
+            }
+
+        }        
+    }
+
+    var div_print = document.createElement("div");
+    div_print.id="div_print";
+    document.body.appendChild(div_print);
+
+    var print = document.createElement("button");
+    print.value="Print";
+    print.textContent = "Print";
+    print.style.display = "none";
+
+    print.addEventListener("click",printFunction);
+    function printFunction(){
+        var print_table = document.createElement("table");
+
+        print_table.setAttribute("class", "table");
+        var print_entrprizeahead = document.createElement("tr");
+        var print_head = document.createElement("td");
+        print_head.colSpan = "6";
+        print_head.textContent = "PT ENTERPRIZE";
+        print_head.style.textAlign = "center";
+
+        print_entrprizeahead.appendChild(print_head);
+        print_table.appendChild(print_entrprizeahead);
+
+
+        var lineOfData_2 = document.querySelector('#noOfrow').value;
+
+        for(var i=1; i<=lineOfData_2; i++){
+            t_item = document.querySelector('#item'+i).value;
+            t_quantity = document.querySelector('#quantity'+i).value;
+            t_rate = document.querySelector('#rate'+i).value;
+            t_tax = document.querySelector('#tax'+i).value;                
+            t_am = document.querySelector('#amount'+i).value;
+            t_taxamount = document.querySelector('#taxamount'+i).value;           
+
+            
+            var print_entrprizeahead = document.createElement("tr");
+
+            var print_head = document.createElement("td");
+            print_head.textContent = i;
+            print_entrprizeahead.appendChild(print_head);
+
+         
+            var print_head = document.createElement("td");
+            print_head.textContent = t_item;
+            print_entrprizeahead.appendChild(print_head);
+
+            var print_head = document.createElement("td");
+            print_head.textContent = t_quantity;
+            print_entrprizeahead.appendChild(print_head);
+
+
+            var print_head = document.createElement("td");
+            print_head.textContent = t_rate;
+            print_entrprizeahead.appendChild(print_head);
+
+            var print_head = document.createElement("td");
+            print_head.textContent = t_tax;
+            print_entrprizeahead.appendChild(print_head);
+
+            var print_head = document.createElement("td");
+            print_head.textContent = t_quantity;
+            print_entrprizeahead.appendChild(print_head);
+            
+            print_table.appendChild(print_entrprizeahead);
+
+
+        }
+
+
+            var table_row_3 = document.createElement("tr");
+            var table_data = document.createElement("td");                    
+            table_data.colSpan = "5";
+            var span = document.createElement("span");
+            span.textContent = "Total Amount";
+            table_data.appendChild(span);
+            table_row_3.appendChild(table_data);
+            var table_data = document.createElement("td");       
+            var span = document.createElement("span");
+            span.textContent = document.querySelector('#am').innerHTML;
+            table_data.appendChild(span);
+            table_row_3.appendChild(table_data);
+
+
+
+            var table_row_4 = document.createElement("tr");
+            var table_data = document.createElement("td");                    
+            table_data.colSpan = "5";
+            var span = document.createElement("span");
+            span.textContent = "Total Tax";
+            table_data.appendChild(span);
+            table_row_4.appendChild(table_data);
+            var table_data = document.createElement("td");       
+            var span = document.createElement("span");
+            span.textContent = document.querySelector('#tx').innerHTML;
+            table_data.appendChild(span);
+            table_row_4.appendChild(table_data);
+
+
+            var table_row_5 = document.createElement("tr");
+            var table_data = document.createElement("td");                    
+            table_data.colSpan = "5";
+            var span = document.createElement("span");
+            span.textContent = "Payble";
+            table_data.appendChild(span);
+            table_row_5.appendChild(table_data);
+            var table_data = document.createElement("td");       
+            var span = document.createElement("span");
+            span.textContent = document.querySelector('#pybl').innerHTML;
+            table_data.appendChild(span);
+            table_row_5.appendChild(table_data);
+
+
+                
+            print_table.appendChild(table_row_3);
+            print_table.appendChild(table_row_4);
+            print_table.appendChild(table_row_5);
+
+
+
+        div_print.appendChild(print_table);
+
+        //var divContents = document.getElementById("div_print").innerHTML;
+
+        var divToPrint = document.getElementById('div_print');
+        var htmlToPrint = '' +
+            '<style type="text/css">' +
+            'table th, table td {' +
+            'border:1px solid #000;' +
+            'padding:0.5em;' +
+            '}' +
+            '</style>';
+        htmlToPrint += divToPrint.outerHTML;
+        newWin = window.open("");
+        newWin.document.write(htmlToPrint);
+        newWin.print();
+        newWin.close();                
+    }
+    print.setAttribute("class","button");
+    div_button.appendChild(print);
+
+</script>
+
+</body>
